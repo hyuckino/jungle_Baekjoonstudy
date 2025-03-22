@@ -2,21 +2,19 @@ import sys
 
 A, B, C = map(int, sys.stdin.readline().split())
 
-# 메모이제이션을 위한 딕셔너리
-dp = {}
+# 짝수인 경우 : A^B = (A^(B/2)) * (A^(B/2))
+# 홀수인 경우 : A^B = (A^(B//2)) * (A^(B//2)) * A
+
+# 모듈러 연산 : 곱셈이 커지기 전에 중간중간에 나머지를 취해도 최종 결과가 동일하다
+# (A * B) % C = ((A % C) * (B % C)) % C
 
 def recur_multi(A, B):
     if B == 0:
         return 1
-    if B in dp:  # 이미 계산된 값이면 반환
-        return dp[B]
-    
     half = recur_multi(A, B // 2) % C
     if B % 2 == 0:
-        dp[B] = (half * half) % C
+        return (half * half) % C
     else:
-        dp[B] = (half * half * A) % C
-    
-    return dp[B]
+        return (half * half * A) % C
 
 print(recur_multi(A, B))
