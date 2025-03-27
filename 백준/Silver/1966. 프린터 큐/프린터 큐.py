@@ -1,16 +1,15 @@
-from collections import deque
-num = int(input())
-
+input = __import__('sys').stdin.readline
+num=int(input())
 for _ in range(num):
-    a,b = map(int,input().split())
-    que = list(map(int, input().split()))
-    ind = list(i for i in range(len(que)))
-    cnt = 0
-    while b in ind:
-        while max(que) != que[0]:
-            que.append(que.pop(0))
-            ind.append(ind.pop(0))
-        que.pop(0)
-        ind.pop(0)
-        cnt += 1
+    length,target=map(int,input().split())
+    li=list(map(int,input().split()))
+    indexed_li = list(enumerate(li))
+    cnt=0
+    result=(-1,-1)
+    while result[0] != target:
+        while max(indexed_li, key=lambda x: x[1]) != indexed_li[0]:
+            tmp=indexed_li.pop(0)
+            indexed_li.append(tmp)
+        result=indexed_li.pop(0)
+        cnt+=1
     print(cnt)
