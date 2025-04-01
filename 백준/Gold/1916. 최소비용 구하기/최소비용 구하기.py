@@ -1,5 +1,5 @@
 from heapq import heappop, heappush
-
+input = __import__('sys').stdin.readline
 def dijkstra(graph, start, end=None):
     n = len(graph)
     
