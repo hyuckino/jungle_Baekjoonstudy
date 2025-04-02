@@ -1,4 +1,5 @@
-
+import sys
+sys.setrecursionlimit(100000)
 n=int(input())
 info=[0]+list(map(int,input()))
 graph={}
